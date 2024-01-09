@@ -1,0 +1,7 @@
+site_name: 'Coultard.DotNet.DataProjection'
+
+nav:
+  - Home: index.md
+
+plugins:
+  - techdocs-core

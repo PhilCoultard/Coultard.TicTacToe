@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: coultard-tictactoe
+  name: coultard-tictactoe
+spec:
+  replicas: 1
+  minReadySeconds: 60 # NB relationship to rollingUpdate
+  selector:
+    matchLabels:
+      app: coultard-tictactoe
+  strategy:
+    type: RollingUpdate
+    rollingUpdate: # NB relationship to minReadySeconds to delay rollout
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: coultard-tictactoe
+    spec:
+      containers:
+      - name: coultard-tictactoe
+        image: docker.io/philcoultard/coultard:coultard-tictactoe
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+            ephemeral-storage: "256Mi"
+          limits:
+            memory: "512Mi" # the memory limit equals the above request!
+            # no cpu limit: this is excluded on purpose
+            ephemeral-storage: "512Mi"
+        env:
+          - name: DOTNET_ENVIRONMENT
+            valueFrom:
+              configMapKeyRef:
+                key: DOTNET_ENVIRONMENT
+                name: coultard-tictactoe-dotnet-env-list
+          - name: ASPNETCORE_ENVIRONMENT
+            valueFrom:
+              configMapKeyRef:
+                key: ASPNETCORE_ENVIRONMENT
+                name: coultard-tictactoe-dotnet-env-list
+      imagePullSecrets:
+      - name: regcred
+      restartPolicy: Always

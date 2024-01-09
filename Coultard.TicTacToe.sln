@@ -1,0 +1,75 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{307477C3-2AB2-4FCC-BDEC-50EDEFED3D9B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{8BEF7268-3EFA-4229-8AF1-F846F25DB451}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		.dockerignore = .dockerignore
+		README.md = README.md
+		Dockerfile = Dockerfile
+		catalog-info.yaml = catalog-info.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{8583DADC-35F6-491E-AC45-6057DFD46AB0}"
+	ProjectSection(SolutionItems) = preProject
+		docs\index.md = docs\index.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coultard.TicTacToe", "src\Coultard.TicTacToe\Coultard.TicTacToe.csproj", "{9017DFDE-8950-42DC-A3C1-A4771982E23C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{2C477AAC-00D3-487A-9C60-0490A20B907E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{10D19499-DB7E-44FD-9E88-70ABD7F31754}"
+	ProjectSection(SolutionItems) = preProject
+		.github\dependabot.yml = .github\dependabot.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{65B586D0-0ADA-4869-843D-5F8495ED1A4B}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\dotnet-build-test-publish.yml = .github\workflows\dotnet-build-test-publish.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "k8s", "k8s", "{95A5FDB2-BBCD-4ED5-B41B-72576F1DC1E9}"
+	ProjectSection(SolutionItems) = preProject
+		k8s\coultard-tictactoe-deployment.yaml = k8s\coultard-tictactoe-deployment.yaml
+		k8s\coultard-tradobot-mongo-configmap.yaml = k8s\coultard-tradobot-mongo-configmap.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker", "docker", "{DF0A3274-AC71-4E8B-83D2-9AD87A6407C3}"
+	ProjectSection(SolutionItems) = preProject
+		docker\coultard-tictactoe-env.list = docker\coultard-tictactoe-env.list
+		docker\docker-start.sh = docker\docker-start.sh
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coultard.TradoBot.Models", "src\Coultard.TicTacToe.Models\Coultard.TradoBot.Models.csproj", "{A81F63A4-D2ED-43DF-9052-345CB007B34A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coultard.TicTacToe.Models.Tests", "tests\Coultard.TicTacToe.Models.Tests\Coultard.TicTacToe.Models.Tests.csproj", "{6FE068AB-5A83-4D79-ACAB-4E58FE3E0D0E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9017DFDE-8950-42DC-A3C1-A4771982E23C} = {307477C3-2AB2-4FCC-BDEC-50EDEFED3D9B}
+		{65B586D0-0ADA-4869-843D-5F8495ED1A4B} = {10D19499-DB7E-44FD-9E88-70ABD7F31754}
+		{A81F63A4-D2ED-43DF-9052-345CB007B34A} = {307477C3-2AB2-4FCC-BDEC-50EDEFED3D9B}
+		{6FE068AB-5A83-4D79-ACAB-4E58FE3E0D0E} = {2C477AAC-00D3-487A-9C60-0490A20B907E}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9017DFDE-8950-42DC-A3C1-A4771982E23C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9017DFDE-8950-42DC-A3C1-A4771982E23C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9017DFDE-8950-42DC-A3C1-A4771982E23C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9017DFDE-8950-42DC-A3C1-A4771982E23C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A81F63A4-D2ED-43DF-9052-345CB007B34A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A81F63A4-D2ED-43DF-9052-345CB007B34A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A81F63A4-D2ED-43DF-9052-345CB007B34A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A81F63A4-D2ED-43DF-9052-345CB007B34A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FE068AB-5A83-4D79-ACAB-4E58FE3E0D0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FE068AB-5A83-4D79-ACAB-4E58FE3E0D0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FE068AB-5A83-4D79-ACAB-4E58FE3E0D0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FE068AB-5A83-4D79-ACAB-4E58FE3E0D0E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,15 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: coultard-tictactoe
+  description: |
+    DotNet.Library.
+  annotations:
+    backstage.io/techdocs-ref: dir:.
+spec:
+  type: service
+  owner: coultard-tradobot
+  system: coultard-tradobot
+  lifecycle: production
+  dependsOn:
+    - component:coultard-dotnet-prog

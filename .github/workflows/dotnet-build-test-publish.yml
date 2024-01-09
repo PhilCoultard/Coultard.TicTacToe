@@ -1,0 +1,52 @@
+name: 'dotnet-build-test'
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+
+concurrency:
+    group: ${{ github.repository }}-${{ github.ref }}
+    cancel-in-progress: true
+
+jobs:
+
+  s3-download:
+    uses: Coultard/Coultard.DevOps.GitHub/.github/workflows/s3-download.yml@main
+    with:
+      s3-bucket-name: coultard.tictactoe
+      soln-name: ${{ github.event.repository.name }}
+  
+  dotnet-build-test:
+    needs: s3-download
+    uses: Coultard/Coultard.DevOps.GitHub/.github/workflows/dotnet-build-test.yml@main
+    with:
+      soln-name: ${{ github.event.repository.name }}
+      build-config: Release
+      build-version: 8.0.${{ github.run_number }}
+    secrets: inherit
+  
+  docs-create:
+    needs: dotnet-build-test
+    uses: Coultard/Coultard.DevOps.GitHub/.github/workflows/dotnet-docs.yml@main
+    with:
+      soln-name: ${{ github.event.repository.name }}
+    secrets: inherit
+  
+  docker-build-publish:
+    if: ${{ !contains(github.event.head_commit.message, 'no-release') }}
+    needs: dotnet-build-test
+    uses: Coultard/Coultard.DevOps.GitHub/.github/workflows/docker-build-publish.yml@main
+    with:
+        soln-name: ${{ github.event.repository.name }}
+        docker-name: coultard-tictactoe
+    secrets: inherit
+  
+  k8s-deploy:
+    needs: docker-build-publish
+    uses: Coultard/Coultard.DevOps.GitHub/.github/workflows/k8s-deploy.yml@main
+    with:
+        soln-name: ${{ github.event.repository.name }}
+        docker-name: coultard-tictactoe
+        k8s-namespace: coultard-tictactoe
+    secrets: inherit

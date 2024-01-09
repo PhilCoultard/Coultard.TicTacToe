@@ -12,7 +12,6 @@ concurrency:
 jobs:
 
   dotnet-build-test:
-    needs: s3-download
     uses: Coultard/Coultard.DevOps.GitHub/.github/workflows/dotnet-build-test.yml@main
     with:
       soln-name: ${{ github.event.repository.name }}

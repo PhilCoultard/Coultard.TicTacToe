@@ -11,12 +11,6 @@ concurrency:
 
 jobs:
 
-  s3-download:
-    uses: Coultard/Coultard.DevOps.GitHub/.github/workflows/s3-download.yml@main
-    with:
-      s3-bucket-name: coultard.tictactoe
-      soln-name: ${{ github.event.repository.name }}
-  
   dotnet-build-test:
     needs: s3-download
     uses: Coultard/Coultard.DevOps.GitHub/.github/workflows/dotnet-build-test.yml@main

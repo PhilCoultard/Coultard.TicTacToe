@@ -1,4 +1,4 @@
-name: 'dotnet-build-test'
+name: 'dotnet-build-test-publish'
 
 on:
   workflow_dispatch:
@@ -11,7 +11,15 @@ concurrency:
 
 jobs:
 
+  s3-download:
+    if: ${{ !contains(github.event.head_commit.message, 'minor') }}
+    uses: Coultard/Coultard.DevOps.GitHub/.github/workflows/s3-download.yml@main
+    with:
+      s3-bucket-name: coultard.betbot
+      soln-name: ${{ github.event.repository.name }}
+  
   dotnet-build-test:
+    needs: s3-download
     uses: Coultard/Coultard.DevOps.GitHub/.github/workflows/dotnet-build-test.yml@main
     with:
       soln-name: ${{ github.event.repository.name }}
@@ -32,14 +40,15 @@ jobs:
     uses: Coultard/Coultard.DevOps.GitHub/.github/workflows/docker-build-publish.yml@main
     with:
         soln-name: ${{ github.event.repository.name }}
-        docker-name: coultard-tictactoe
+        docker-name: coultard-betbot-tictactoe
     secrets: inherit
-  
+
   k8s-deploy:
     needs: docker-build-publish
+    if: contains(github.event.head_commit.message, 'create-release')
     uses: Coultard/Coultard.DevOps.GitHub/.github/workflows/k8s-deploy.yml@main
     with:
-        soln-name: ${{ github.event.repository.name }}
-        docker-name: coultard-tictactoe
-        k8s-namespace: coultard-tictactoe
+      soln-name: ${{ github.event.repository.name }}
+      docker-name: coultard-betbot-tictactoe
+      k8s-namespace: coultard-betbot
     secrets: inherit

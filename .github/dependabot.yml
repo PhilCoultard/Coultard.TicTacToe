@@ -6,8 +6,7 @@ registries:
   github-feed:
     type: nuget-feed
     url: https://nuget.pkg.github.com/Coultard/index.json
-    username: ${{ secrets.GH_USERNAME }}
-    password: ${{ secrets.GH_PAT }}
+    token: ${{ secrets.GH_PAT }}
 updates:
   - package-ecosystem: "nuget"
     directory: "/"

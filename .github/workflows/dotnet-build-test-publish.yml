@@ -15,7 +15,7 @@ jobs:
     if: ${{ !contains(github.event.head_commit.message, 'minor') }}
     uses: Coultard/Coultard.DevOps.GitHub/.github/workflows/s3-download.yml@main
     with:
-      s3-bucket-name: coultard.betbot
+      s3-bucket-name: coultard.tictactoe
       soln-name: ${{ github.event.repository.name }}
   
   dotnet-build-test:
@@ -40,7 +40,7 @@ jobs:
     uses: Coultard/Coultard.DevOps.GitHub/.github/workflows/docker-build-publish.yml@main
     with:
         soln-name: ${{ github.event.repository.name }}
-        docker-name: coultard-betbot-tictactoe
+        docker-name: coultard-tictactoe
     secrets: inherit
 
   k8s-deploy:
@@ -49,6 +49,6 @@ jobs:
     uses: Coultard/Coultard.DevOps.GitHub/.github/workflows/k8s-deploy.yml@main
     with:
       soln-name: ${{ github.event.repository.name }}
-      docker-name: coultard-betbot-tictactoe
-      k8s-namespace: coultard-betbot
+      docker-name: coultard-tictactoe
+      k8s-namespace: coultard-tictactoe
     secrets: inherit
